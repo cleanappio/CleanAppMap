@@ -1,0 +1,2 @@
+# CleanAppMap
+dev notes
