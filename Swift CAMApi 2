@@ -1,0 +1,25 @@
+import Foundation
+import CleanAppMapKit
+
+class CleanAppMapAPI {
+
+    // MARK: - Properties
+
+    let cleanAppMapOverlay: CleanAppMapOverlay
+
+    // MARK: - Initialization
+
+    init(cleanAppMapOverlay: CleanAppMapOverlay) {
+        self.cleanAppMapOverlay = cleanAppMapOverlay
+    }
+
+    // MARK: - API Methods
+
+    func fetchCleanAppMapData(completion: @escaping (Result<CleanAppMapData, Error>) -> Void) {
+        // Use the CleanAppMapKit framework to fetch the data for the CleanAppMap overlay
+        let cleanAppMapData = cleanAppMapOverlay.fetchData()
+
+        // Return the data to the completion handler
+        completion(.success(cleanAppMapData))
+    }
+}
