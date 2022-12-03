@@ -1,0 +1,16 @@
+import MapKit
+
+class CleanAppMapOverlay: NSObject, MKOverlay {
+
+    // MARK: - Properties
+
+    let coordinate: CLLocationCoordinate2D
+    let boundingMapRect: MKMapRect
+
+    // MARK: - Initialization
+
+    init(coordinate: CLLocationCoordinate2D, boundingMapRect: MKMapRect) {
+        self.coordinate = coordinate
+        self.boundingMapRect = boundingMapRect
+    }
+}
