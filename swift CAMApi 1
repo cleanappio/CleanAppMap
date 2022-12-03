@@ -1,0 +1,16 @@
+import Vapor
+
+struct CleanAppMapAPI: RouteCollection {
+    func boot(routes: RoutesBuilder) throws {
+        let cleanAppMapRoutes = routes.grouped("cleanappmap")
+
+        cleanAppMapRoutes.get("coordinate") { req -> String in
+            // Get the coordinate of the CleanAppMap overlay from the database
+            let coordinate = try CleanAppMap.query(on: req.db).first().flatMap { $0.coordinate } ?? CLLocationCoordinate2D()
+            return "\(coordinate.latitude),\(coordinate.longitude)"
+        }
+
+        cleanAppMapRoutes.get("boundingMapRect") { req -> String in
+            // Get the bounding map rect of the CleanAppMap overlay from the database
+            let boundingMapRect = try CleanAppMap.query(on: req.db).first().flatMap { $0.boundingMapRect } ?? MKMapRect()
+            return "\(boundingMapRect.origin.x),\(boundingMapRect.origin.y),\(boundingMapRect.size.width),\
