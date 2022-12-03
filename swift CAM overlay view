@@ -1,0 +1,31 @@
+import UIKit
+import MapKit
+import CleanAppMapKit
+
+class MapViewController: UIViewController {
+
+    // MARK: - Properties
+
+    let mapView = MKMapView()
+    let cleanAppMapOverlay = CleanAppMapOverlay()
+
+    // MARK: - View Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Set up the map view
+        mapView.mapType = .mutedStandard
+        mapView.addOverlay(cleanAppMapOverlay)
+        view.addSubview(mapView)
+    }
+
+    // MARK: - MKMapViewDelegate
+
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is CleanAppMapOverlay {
+            return CleanAppMapOverlayRenderer(overlay: overlay)
+        }
+        return MKOverlayRenderer(overlay: overlay)
+    }
+}
